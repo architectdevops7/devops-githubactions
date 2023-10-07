@@ -1,5 +1,4 @@
-# webapp_ecommerce
-
+# webapp_ecommerce  
 
 **groupId and artifactId**: These elements specify the unique identifiers for your project. groupId typically represents your organization or group, while artifactId represents your project's name.  
 
