@@ -19,6 +19,11 @@ jobs:
           java-version: '11' # Choose the appropriate Java version from your pom.xml
           distribution: 'adopt' # Specify the Linux distribution (e.g., 'adopt', 'zulu')
 
+      - name: Debug
+        run: |
+          pwd
+          ls -l
+
       - name: Build and Test
         run: |
           # Navigate to your project directory (assuming your pom.xml is there)
