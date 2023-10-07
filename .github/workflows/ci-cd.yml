@@ -27,7 +27,7 @@ jobs:
       - name: Build and Test
         run: |
           # Navigate to your project directory (assuming your pom.xml is there)
-          cd webapp_ecommerce
+          cd /home/runner/work/webapp_ecommerce/webapp_ecommerce
           # Build and test your Java application using Maven
           mvn clean install
       # - name: Deploy
