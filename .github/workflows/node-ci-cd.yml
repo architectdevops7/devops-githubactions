@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
+      - name: Debug SSH Key File
+        run: |
+          cat ssh_key
+          ssh-add -l
+      
       - name: Set up SSH
         run: |
           echo "$DEPLOY_SSH_KEY" > ssh_key
