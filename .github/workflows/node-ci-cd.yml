@@ -37,7 +37,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            - cd /home/runner/work/devops-githubactions/devops-githubactions/simple-nodejs-app
-            - git pull origin main
-            - npm install
-            - pm2 restart simple-nodejs-app
+            cd /home/runner/work/devops-githubactions/devops-githubactions/simple-nodejs-app
+            git pull origin main
+            npm install
+            pm2 restart simple-nodejs-app
