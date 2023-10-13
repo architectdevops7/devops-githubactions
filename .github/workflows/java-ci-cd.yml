@@ -1,0 +1,36 @@
+name: Java CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11' # Choose the appropriate Java version from your pom.xml
+          distribution: 'adopt' # Specify the Linux distribution (e.g., 'adopt', 'zulu')
+
+      - name: Debug
+        run: |
+          pwd
+          ls -l
+
+      - name: Build and Test
+        run: |
+          # Navigate to your project directory (assuming your pom.xml is there)
+          cd /home/runner/work/webapp_ecommerce/webapp_ecommerce
+          # Build and test your Java application using Maven
+          mvn clean install
+      # - name: Deploy
+      #   run: |
+      #     echo "Deploying..."
+      #     # Add your deployment script or commands here
