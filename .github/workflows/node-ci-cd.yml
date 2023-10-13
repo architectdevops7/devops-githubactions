@@ -12,6 +12,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      
+      - name: Set up SSH
+        run: |
+          echo "$DEPLOY_SSH_KEY" > ssh_key
+          chmod 600 ssh_key
+          eval "$(ssh-agent -s)"
+          ssh-add ssh_key
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -35,10 +42,6 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          # Set up the SSH key
-          echo "$DEPLOY_SSH_KEY" > ssh_key
-          chmod 600 ssh_key
-          ssh-add ssh_key
 
           # Copy application files to the server
           scp -i ssh_key -r ./dist/* root@54.167.91.231:/opt
