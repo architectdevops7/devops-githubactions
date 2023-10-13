@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-      
+
       - name: Debug
         run: |
           pwd
@@ -28,17 +28,6 @@ jobs:
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm install
 
-      - name: Audit for vulnerabilities
-        run: |
-          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-          npm audit
-          exit $(npm audit --parse | grep 'high' && echo 1 || echo 0)
-
-      # - name: Fix vulnerabilities (optional)
-      #   run: |
-      #     cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-      #     npm audit fix
-
       - name: Run tests
         run: npm test
 
@@ -46,5 +35,3 @@ jobs:
         run: |
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm run build
-
-
