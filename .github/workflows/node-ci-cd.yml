@@ -37,9 +37,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            # Enter your deployment steps here
-            # For example:
-            # - cd /path/to/your/app
-            # - git pull origin main
-            npm install
-            # - pm2 restart your-app
+            - cd /home/runner/work/devops-githubactions/devops-githubactions/simple-nodejs-app
+            - git pull origin main
+            - npm install
+            - pm2 restart simple-nodejs-app
