@@ -32,11 +32,12 @@ jobs:
         run: |
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm audit
+          exit $(npm audit --parse | grep 'high' && echo 1 || echo 0)
 
-      - name: Fix vulnerabilities (optional)
-        run: |
-          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-          npm audit fix
+      # - name: Fix vulnerabilities (optional)
+      #   run: |
+      #     cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+      #     npm audit fix
 
       - name: Run tests
         run: npm test
