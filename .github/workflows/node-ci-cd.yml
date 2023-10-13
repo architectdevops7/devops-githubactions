@@ -30,15 +30,15 @@ jobs:
           pwd
           ls -l
 
-      # - name: Install dependencies
-      #   run: |
-      #     cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-      #     npm install
+      - name: Install dependencies
+        run: |
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+          npm install
 
-      # - name: Build
-      #   run: |
-      #     cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-      #     npm run build
+      - name: Build
+        run: |
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+          npm run build
 
       # - name: Deploy to Server
       #   run: |
@@ -59,9 +59,8 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            whoami
-            # cd /opt/simple-nodejs-app
-            # git pull origin master
-            # git status
-            # npm install --only=prod
-            # pm2 restart simple-nodejs-app
+            cd /opt/simple-nodejs-app
+            git pull origin master
+            git status
+            npm install --only=prod
+            pm2 restart simple-nodejs-app
