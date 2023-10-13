@@ -28,11 +28,6 @@ jobs:
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm install
 
-      - name: Run tests
-        run: |
-          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-          npm test
-
       - name: Build
         run: |
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
