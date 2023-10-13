@@ -59,7 +59,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd /opt/
+            cd node-webapp-githubactions
             git pull origin main
             git status
             npm install --only=prod
