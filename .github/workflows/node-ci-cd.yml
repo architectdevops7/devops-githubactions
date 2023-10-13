@@ -82,9 +82,8 @@ jobs:
         run: |
           echo "$YOUR-SSH-KEY" > ssh_key
           chmod 600 ssh_key
-          echo -e "Host 54.236.235.192\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-          scp -i ssh_key -r ./dist/* root@54.236.235.192:/opt/
-          ssh -i ssh_key root@54.236.235.192 'cd /opt && npm install && pm2 restart simple-nodejs-app'
+          scp -i ssh_key -o StrictHostKeyChecking=no -r ./dist/* root@54.236.235.192:/opt/
+          ssh -i ssh_key -o StrictHostKeyChecking=no root@54.236.235.192 'cd /opt && npm install && pm2 restart simple-nodejs-app'
         env:
           YOUR-SSH-KEY: ${{ secrets.PRIVATE_KEY }}
 
