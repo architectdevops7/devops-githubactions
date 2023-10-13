@@ -86,24 +86,25 @@ jobs:
       #     ssh-add $GITHUB_WORKSPACE/ssh_key
       #     scp -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no -r ./dist/* root@54.236.235.192:/opt/
       #     ssh -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no root@54.236.235.192 'cd /opt && npm install && pm2 restart simple-nodejs-app'
-        - name: Create SSH Key File
-          run: |
-            echo "$YOUR-SSH-KEY" > $GITHUB_WORKSPACE/ssh_key
-            chmod 600 $GITHUB_WORKSPACE/ssh_key
+      - name: Create SSH Key File
+        run: |
+          echo "$YOUR-SSH-KEY" > $GITHUB_WORKSPACE/ssh_key
+          chmod 600 $GITHUB_WORKSPACE/ssh_key
 
-        - name: Debug SSH Key
-          run: |
-            cat $GITHUB_WORKSPACE/ssh_key
+      - name: Debug SSH Key
+        run: |
+          cat $GITHUB_WORKSPACE/ssh_key
 
-        - name: Set up SSH Key
-          run: |
-            eval "$(ssh-agent -s)"
-            ssh-add $GITHUB_WORKSPACE/ssh_key
+      - name: Set up SSH Key
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add $GITHUB_WORKSPACE/ssh_key
 
-        - name: Deploy to Server
-          run: |
-            scp -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no -r ./dist/* root@54.236.235.192:/opt/
-            ssh -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no root@54.236.235.192 'cd /opt && npm install && pm2 restart simple-nodejs-app'
-        env:
-          YOUR-SSH-KEY: ${{ secrets.PRIVATE_KEY }}
+      - name: Deploy to Server
+        run: |
+          scp -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no -r ./dist/* root@54.236.235.192:/opt/
+          ssh -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no root@54.236.235.192 'cd /opt && npm install && pm2 restart simple-nodejs-app'
+      
+      env:
+        YOUR-SSH-KEY: ${{ secrets.PRIVATE_KEY }}
 
