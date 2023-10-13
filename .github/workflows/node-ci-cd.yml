@@ -35,3 +35,13 @@ jobs:
         run: |
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm run build
+          
+      - name: Audit for vulnerabilities
+        run: |
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+          npm audit
+
+      - name: Fix vulnerabilities (optional)
+        run: |
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+          npm audit fix
