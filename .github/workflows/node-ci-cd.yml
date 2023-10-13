@@ -78,6 +78,11 @@ jobs:
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm run build
 
+      - name: Debug SSH Key
+        run: |
+          cat ssh_key
+          ssh-keygen -y -f ssh_key
+          
       - name: Deploy to Server
         run: |
           echo "$YOUR-SSH-KEY" > ssh_key
