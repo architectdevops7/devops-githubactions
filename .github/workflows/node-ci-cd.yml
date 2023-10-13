@@ -17,6 +17,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
+      
+      - name: Debug
+        run: |
+          pwd
+          ls -l
 
       - name: Install dependencies
         run: npm install
@@ -25,4 +30,6 @@ jobs:
         run: npm test
 
       - name: Build
-        run: npm run build
+        run: |
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+          npm run build
