@@ -17,15 +17,13 @@ jobs:
         run: |
           echo "$DEPLOY_SSH_KEY" > ssh_key
           chmod 600 ssh_key
-          cat ssh_key
-          ssh-add -l
-          eval "$(ssh-agent -s)"
+          # eval "$(ssh-agent -s)"
           # ssh-add ssh_key
       
-      # - name: Debug SSH Key File
-      #   run: |
-      #     cat ssh_key
-      #     ssh-add -l
+      - name: Debug SSH Key File
+        run: |
+          cat ssh_key
+          # ssh-add -l
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
