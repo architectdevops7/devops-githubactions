@@ -78,19 +78,14 @@ jobs:
           cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm run build
 
-      - name: Debug SSH Key
-        run: |
-          cat ssh_key
-          ssh-keygen -y -f ssh_key
-          
       - name: Deploy to Server
         run: |
-          echo "$YOUR-SSH-KEY" > ssh_key
-          chmod 600 ssh_key
+          echo "$YOUR-SSH-KEY" > $GITHUB_WORKSPACE/ssh_key
+          chmod 600 $GITHUB_WORKSPACE/ssh_key
           eval "$(ssh-agent -s)"
-          ssh-add ssh_key
-          scp -i ssh_key -o StrictHostKeyChecking=no -r ./dist/* root@54.236.235.192:/opt/
-          ssh -i ssh_key -o StrictHostKeyChecking=no root@54.236.235.192 'cd /opt && npm install && pm2 restart simple-nodejs-app'
+          ssh-add $GITHUB_WORKSPACE/ssh_key
+          scp -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no -r ./dist/* root@54.236.235.192:/opt/
+          ssh -i $GITHUB_WORKSPACE/ssh_key -o StrictHostKeyChecking=no root@54.236.235.192 'cd /opt && npm install && pm2 restart simple-nodejs-app'
         env:
           YOUR-SSH-KEY: ${{ secrets.PRIVATE_KEY }}
 
