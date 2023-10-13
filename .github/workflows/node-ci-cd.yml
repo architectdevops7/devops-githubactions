@@ -34,14 +34,13 @@ jobs:
           npm run build
 
       - name: Deploy using ssh
-        uses: appleboy/ssh-action@master
+        uses: actions/checkout@v2
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            uses: actions/checkout@v2
             git pull origin main
             git status
             npm install --only=prod
