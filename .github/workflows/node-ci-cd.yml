@@ -20,10 +20,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd /home/runner/work/devops-githubactions/devops-githubactions/
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm install
 
       - name: Build
         run: |
-          cd /home/runner/work/devops-githubactions/devops-githubactions/
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm run build
