@@ -42,8 +42,8 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/node-webapp-githubactions
 
-          # Check if the application is already running
-          RUNNING=$(pm2 show searchapi)
+          # # Check if the application is already running
+          # RUNNING=$(pm2 show searchapi)
 
           # # If the application is running, stop it
           # if [ -n "$RUNNING" ]; then
