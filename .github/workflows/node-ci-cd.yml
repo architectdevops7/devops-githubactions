@@ -38,20 +38,20 @@ jobs:
         with:
           ref: main # Specify the branch to be checked out
       
-      - name: Verify current directory
-        run: |
-          pwd
-          ls
+      # - name: Verify current directory
+      #   run: |
+      #     pwd
+      #     ls
 
-      - name: List files in the directory
-        run: ls /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+      # - name: List files in the directory
+      #   run: ls /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
 
       - name: Deploy to Server
         run: |
-          cd /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-          if pm2 start index.js; then
-            echo "Application restarted successfully."
-          else
-            echo "Failed to restart the application."
-            exit 1
-          fi
+          cd $GITHUB_WORKSPACE/node-webapp-githubactions
+
+          # Install Node.js dependencies
+          npm install
+          
+          # start the application
+          pm2 start index.js --name=searchapi
