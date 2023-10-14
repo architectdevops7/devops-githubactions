@@ -1,4 +1,4 @@
-name: Java CI/CD Pipeline
+name: Java-SelfHosted CI/CD Pipeline
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -26,14 +26,5 @@ jobs:
 
       - name: Build and Test
         run: |
-          # Navigate to your project directory (assuming your pom.xml is there)
-          cd /home/runner/work/devops-githubactions/devops-githubactions/java-webapp-githubactions
-          # Build and test your Java application using Maven
+          cd $GITHUB_WORKSPACE # Navigate to your project directory
           mvn clean install
-      # - name: Deploy
-      #   run: |
-      #     echo "Deploying..."
-      #     # Add your deployment script or commands here
-
-
-
