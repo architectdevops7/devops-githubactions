@@ -35,20 +35,20 @@ jobs:
 
     steps:
       - name: Checkout code
-          uses: actions/checkout@v2
-          with:
-            ref: main # Specify the branch to be checked out
+        uses: actions/checkout@v2
+        with:
+          ref: main # Specify the branch to be checked out
 
-        - name: Run Deploy Script
-          uses: appleboy/ssh-action@master
-          with:
-              host: ${{ secrets.HOST }}
-              username: ${{ secrets.USERNAME }}
-              key: ${{ secrets.PRIVATE_KEY }}
-              port: 22
-          run: |
-            cd $GITHUB_WORKSPACE # Navigate to the root of your repository
+      - name: Run Deploy Script
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.PRIVATE_KEY }}
+            port: 22
+        run: |
+          cd $GITHUB_WORKSPACE # Navigate to the root of your repository
 
-            # You can execute your deploy script here, e.g., for a simple deployment:
-            # Ensure your deploy script (e.g., deploy.sh) is in the root of your repository
-            bash deploy.sh
+          # You can execute your deploy script here, e.g., for a simple deployment:
+          # Ensure your deploy script (e.g., deploy.sh) is in the root of your repository
+          bash deploy.sh
