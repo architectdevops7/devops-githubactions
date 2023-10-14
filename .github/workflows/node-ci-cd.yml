@@ -53,7 +53,7 @@ jobs:
               cd /opt/your-app
 
               # Now clone your Git repository into the destination directory
-              git clone https://github.com/architectdevops7/devops-githubactions.git .
+              git clone https://github.com/architectdevops7/devops-githubactions.git
               
               # Pull the latest changes from the Git repository (source-less deployment)
               git pull origin main
