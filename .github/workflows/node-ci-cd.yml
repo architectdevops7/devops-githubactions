@@ -45,5 +45,5 @@ jobs:
         
       - name: Deploy to Server
         run: |
-          cd node-webapp-githubactions
+          cd /home/runner/work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           pm2 restart index.js
