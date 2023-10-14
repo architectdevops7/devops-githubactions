@@ -50,4 +50,5 @@ jobs:
               cd /opt/your-app # Change this to the correct path
               git pull origin main
               npm install
-              pm2 restart simple-nodejs-app
+              sudo pm2 stop ./dist/index.js &&
+              sudo pm2 start ./dist/index.js
