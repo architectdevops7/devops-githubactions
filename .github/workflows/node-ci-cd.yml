@@ -49,7 +49,7 @@ jobs:
       - name: Deploy to Server
         run: |
           cd /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
-          if pm2 start simple-nodejs-app; then
+          if pm2 start index.js; then
             echo "Application restarted successfully."
           else
             echo "Failed to restart the application."
