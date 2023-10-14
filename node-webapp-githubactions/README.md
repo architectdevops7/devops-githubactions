@@ -12,3 +12,15 @@ Simple-nodejs-app is a simple web application created using [Node.js](https://gi
 
 - After installation, run ```npm install``` to download and install all the required dependencies.
 - Run ```npm start``` to run the web application.
+
+## Common usage
+
+- sudo apt install nodejs
+- sudo apt install npm
+- sudo ./svc.sh install
+- sudo ./svc.sh start
+
+- pm2 list
+- pm2 start index.js --name=searchapi
+- pm2 stop searchapi
+- pm2 delete searchapi
