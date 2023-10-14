@@ -42,7 +42,10 @@ jobs:
         run: |
           pwd
           ls
-        
+
+      - name: List files in the directory
+        run: ls /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+
       - name: Deploy to Server
         run: |
           cd $GITHUB_WORKSPACE/node-webapp-githubactions
