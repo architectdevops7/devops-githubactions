@@ -56,5 +56,5 @@ jobs:
               git pull origin main
               
               # Use PM2 to restart the application (assuming you've already built and bundled it)
-              sudo pm2 stop ./dist/index.js
-              sudo pm2 start ./dist/index.js
+              sudo pm2 stop /opt/your-app/dist/index.js
+              sudo pm2 start /opt/your-app/dist/index.js
