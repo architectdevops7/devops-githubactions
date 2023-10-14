@@ -51,10 +51,13 @@ jobs:
               
               # Navigate to the destination directory
               cd /opt/your-app
+
+              # Now clone your Git repository into the destination directory
+              git clone https://github.com/architectdevops7/devops-githubactions.git .
               
               # Pull the latest changes from the Git repository (source-less deployment)
               git pull origin main
               
               # Use PM2 to restart the application (assuming you've already built and bundled it)
-              sudo pm2 stop /opt/your-app/dist/index.js
-              sudo pm2 start /opt/your-app/dist/index.js
+              sudo pm2 stop /opt/your-app/devops-githubactions/node-webapp-githubactions/index.js
+              sudo pm2 stop /opt/your-app/devops-githubactions/node-webapp-githubactions/index.js
