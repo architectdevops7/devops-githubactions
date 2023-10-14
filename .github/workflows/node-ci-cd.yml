@@ -27,3 +27,19 @@ jobs:
         run: |
           cd /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build # Ensure the build job is completed before deploying
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main # Specify the branch to be checked out
+        
+      - name: Deploy to Server
+        run: |
+          cd /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
+          pm2 stop
+          pm2 start
