@@ -48,7 +48,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          cd $GITHUB_WORKSPACE/node-webapp-githubactions
+          cd /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
           if pm2 restart index.js; then
             echo "Application restarted successfully."
           else
