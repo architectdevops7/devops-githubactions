@@ -30,7 +30,7 @@ jobs:
 
       # Deployment Steps
       - name: Deploy to Server
-        uses: actions/checkout@v2
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
