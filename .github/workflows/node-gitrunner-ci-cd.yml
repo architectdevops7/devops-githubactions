@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -18,15 +18,17 @@ jobs:
         with:
           node-version: 14
 
-      - name: Run Build Script
+      - name: Access the remote machine
         uses: appleboy/ssh-action@master
         with:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.USERNAME }}
             key: ${{ secrets.PRIVATE_KEY }}
             port: 22
+      
+      - name: Deploy to Server
         run: |
-          cd $GITHUB_WORKSPACE # Navigate to the root of your repository
+          cd $GITHUB_WORKSPACE/node-webapp-githubactions
           bash build.sh
 
   # deploy:
