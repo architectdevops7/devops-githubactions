@@ -1,4 +1,4 @@
-name: Node CI/CD Pipeline
+name: Node-SelfHosted CI/CD Pipeline
 
 on:
   push:
