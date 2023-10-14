@@ -38,17 +38,23 @@ jobs:
           with:
             ref: main # Specify the branch to be checked out
         
-        - name: Deploy to Server
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            key: ${{ secrets.PRIVATE_KEY }}
-            port: 22
-            script: |
-              mkdir -p /opt/your-app # Create the destination directory in /opt
-              cd /opt/your-app # Change this to the correct path
-              git pull origin main
-              npm install
-              sudo pm2 stop ./dist/index.js &&
-              sudo pm2 start ./dist/index.js
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Create the destination directory in /opt
+            mkdir -p /opt/your-app
+            
+            # Navigate to the destination directory
+            cd /opt/your-app
+            
+            # Pull the latest changes from the Git repository (source-less deployment)
+            git pull origin main
+            
+            # Use PM2 to restart the application (assuming you've already built and bundled it)
+            sudo pm2 stop ./dist/index.js
+            sudo pm2 start ./dist/index.js
