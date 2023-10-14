@@ -37,21 +37,21 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main # Specify the branch to be checked out
-      
-      # - name: Verify current directory
-      #   run: |
-      #     pwd
-      #     ls
-
-      # - name: List files in the directory
-      #   run: ls /home/ubuntu/actions-runner/nodejs_work/devops-githubactions/devops-githubactions/node-webapp-githubactions
 
       - name: Deploy to Server
         run: |
           cd $GITHUB_WORKSPACE/node-webapp-githubactions
 
+          # Check if the application is already running
+          RUNNING=$(pm2 show searchapi)
+
+          # If the application is running, stop it
+          if [ -n "$RUNNING" ]; then
+            pm2 stop searchapi
+          fi
+
           # Install Node.js dependencies
           npm install
-          
-          # start the application
+
+          # Start the application
           pm2 start index.js --name=searchapi
