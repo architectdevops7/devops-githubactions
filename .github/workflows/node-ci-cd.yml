@@ -38,7 +38,6 @@ jobs:
           port: 22
           script: |
             mkdir -p /opt/githubactions
-            cd /home/runner/work/devops-githubactions/devops-githubactions/simple-nodejs-app
             git pull origin main
             npm install
             pm2 restart simple-nodejs-app
