@@ -37,3 +37,17 @@ jobs:
           uses: actions/checkout@v2
           with:
             ref: main # Specify the branch to be checked out
+        
+        - name: Deploy to Server
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.PRIVATE_KEY }}
+            port: 22
+            script: |
+              mkdir -p /opt/your-app # Create the destination directory in /opt
+              cd /opt/your-app # Change this to the correct path
+              git pull origin main
+              npm install
+              pm2 restart simple-nodejs-app
