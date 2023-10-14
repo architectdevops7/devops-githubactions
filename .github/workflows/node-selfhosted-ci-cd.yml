@@ -45,10 +45,10 @@ jobs:
           # Check if the application is already running
           RUNNING=$(pm2 show searchapi)
 
-          # If the application is running, stop it
-          if [ -n "$RUNNING" ]; then
-            pm2 stop searchapi
-          fi
+          # # If the application is running, stop it
+          # if [ -n "$RUNNING" ]; then
+          #   pm2 stop searchapi
+          # fi
 
           # Install Node.js dependencies
           npm install
