@@ -1,0 +1,56 @@
+name: Custom Environment Variables Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      MY_CUSTOM_VAR: 'custom_value'
+    
+    steps:
+    - name: Print Custom Variable
+      run: echo "Custom variable value: $MY_CUSTOM_VAR"
+
+---
+
+name: Default Environment Variables Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Print Repository Name
+      run: echo "Repository name: $GITHUB_REPOSITORY"
+    - name: Print Commit SHA
+      run: echo "Commit SHA: $GITHUB_SHA"
+
+---
+
+GITHUB_REPOSITORY: The repository name in the format owner/repository.
+GITHUB_ACTOR: The username of the person or app that initiated the workflow run.
+GITHUB_SHA: The commit SHA that triggered the workflow.
+GITHUB_REF: The branch or tag ref that triggered the workflow.
+GITHUB_EVENT_NAME: The name of the event that triggered the workflow.
+GITHUB_EVENT_PATH: The path to a file containing the event JSON payload.
+GITHUB_WORKFLOW: The name of the workflow.
+GITHUB_WORKSPACE: The path of the GitHub workspace directory.
+GITHUB_ACTION: The name of the action currently running.
+GITHUB_HEAD_REF: Only set for pull request events. The head branch name.
+GITHUB_BASE_REF: Only set for pull request events. The base branch name.
+GITHUB_RUN_ID: The unique identifier of the workflow run.
+GITHUB_RUN_NUMBER: The unique number of the workflow run.
+GITHUB_SERVER_URL: The URL of the GitHub server.
+GITHUB_API_URL: The URL of the GitHub API.
+GITHUB_GRAPHQL_URL: The URL of the GitHub GraphQL API.
+RUNNER_OS: The operating system of the runner executing the job (e.g., Windows, Linux, macOS).

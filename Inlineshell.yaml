@@ -1,0 +1,59 @@
+name: Inline Shell and Checkout Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Run inline shell commands
+      run: |
+        echo "Hello, world!"
+        mkdir my_directory
+        cd my_directory
+        touch my_file.txt
+        ls -l
+
+---
+
+name: Inline Shell and Checkout Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Run inline shell commands
+      run: |
+        echo "Hello, world!"
+        mkdir my_directory
+        cd my_directory
+        touch my_file.txt
+        ls -l
+
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Run tests
+      run: |
+        echo "Running tests..."
+        # Add your test commands here

@@ -1,0 +1,29 @@
+name: Event-based Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  issues:
+    types: [opened, closed]
+  schedule:
+    - cron: '0 0 * * *' # Runs at midnight every day
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Run inline shell commands
+      run: |
+        echo "Hello, world!"
+        mkdir my_directory
+        cd my_directory
+        touch my_file.txt
+        ls -l

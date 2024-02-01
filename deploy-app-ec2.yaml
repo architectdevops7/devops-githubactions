@@ -1,0 +1,35 @@
+Steps:
+1. Prepare Your EC2 Instance
+2. Configure GitHub Secrets
+3. Create a Deployment script
+4. Write GitHub Actions Workflow
+
+---
+name: Deploy WebApp to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Install SSH client
+      run: sudo apt-get install openssh-client
+      
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /path/to/your/webapp
+          git pull origin main
+          # Additional deployment steps (e.g., build, restart server) here

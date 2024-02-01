@@ -1,0 +1,48 @@
+Encrypting and decrypting files in GitHub Actions workflows can be achieved using the gpg (GnuPG) tool, which provides encryption and decryption capabilities. Here's how you can encrypt and decrypt files in a GitHub Actions workflow:
+
+Encrypting Files:
+Generate a GPG Key Pair:
+If you don't already have a GPG key pair, you can generate one using the gpg --full-generate-key command.
+
+Export the Public Key:
+Export the public key using gpg --export --armor your-email@example.com > public.key.
+
+Add the Public Key to GitHub Secrets:
+Add the content of the exported public key file to a secret in your GitHub repository.
+
+Encrypt the File:
+Use the gpg --encrypt --recipient your-email@example.com file.txt command to encrypt the file.
+
+Store the Encrypted File:
+Store the encrypted file in your repository or a secure location.
+
+Decrypting Files:
+Add the Private Key to GitHub Secrets:
+Add the private key to a secret in your GitHub repository.
+
+Decrypt the File:
+Use the gpg --decrypt --secret-keyring=./private.key file.txt.gpg command to decrypt the file.
+
+---
+name: Decrypt File Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  decrypt:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Install GnuPG
+      run: sudo apt-get install gnupg
+      
+    - name: Decrypt file
+      run: |
+        echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+        gpg --decrypt --batch --passphrase "${{ secrets.GPG_PASSPHRASE }}" --output decrypted_file.txt encrypted_file.txt.gpg

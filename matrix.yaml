@@ -1,0 +1,47 @@
+The matrix strategy in GitHub Actions allows you to run a job with multiple configurations, also known as a matrix. This is particularly useful when you want to test your code across different versions of dependencies, operating systems, or other parameters.
+
+---
+name: Matrix Strategy Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node-version: [12, 14, 16]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Print OS and Node.js version
+      run: |
+        echo "Running on ${{ matrix.os }} with Node.js version ${{ matrix.node-version }}"
+
+---
+Exclude matrix
+
+strategy:
+  matrix:
+    os: [ubuntu-latest, windows-latest, macOS-latest]
+    node-version: [12, 14, 16]
+    include:
+      - os: ubuntu-latest
+        node-version: 12
+      - os: windows-latest
+        node-version: 14
+    exclude:
+      - os: macOS-latest
+        node-version: 16

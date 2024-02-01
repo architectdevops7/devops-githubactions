@@ -1,0 +1,30 @@
+In GitHub Actions, contexts are predefined sets of information that provide details about the environment, workflow run, event, or job being executed. Contexts are accessible within workflows as variables and can be used to make decisions, customize behavior, or retrieve information during the workflow execution.
+
+---
+name: Branch-specific Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Build and Test
+      run: |
+        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          echo "Building and testing main branch..."
+          # Add your build and test commands for the main branch here
+        elif [[ "${{ github.ref }}" == "refs/heads/feature/"* ]]; then
+          echo "Building and testing feature branch..."
+          # Add your build and test commands for feature branches here
+        else
+          echo "Skipping build and test for other branches..."
+        fi

@@ -1,0 +1,72 @@
+Push Event:
+This event occurs when someone pushes commits to a repository.
+It includes actions such as creating a new branch, pushing changes to an existing branch, or force-pushing changes to a branch.
+When a push event occurs, GitHub Actions workflows configured with the push event trigger will be activated.
+
+Pull Request Event:
+This event occurs when a pull request is opened, synchronized (updated), or closed.
+It represents the action of proposing changes from one branch (the source branch) into another branch (the target branch) via a pull request.
+When a pull_request event occurs, GitHub Actions workflows configured with the pull_request event trigger will be activated.
+
+---
+
+name: Branch Filtering Example
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    # Add your build steps here
+
+---
+
+name: Exclude Branch Example
+
+on:
+  push:
+    branches:
+      - '*'
+    # Exclude the 'feature' branch
+    branches-ignore:
+      - 'feature/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    # Add your build steps here
+
+---
+
+name: Include All Branches Example
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    # Add your build steps here

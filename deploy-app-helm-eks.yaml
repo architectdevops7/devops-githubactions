@@ -1,0 +1,59 @@
+name: Deploy Helm Chart to EKS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install AWS CLI and kubectl
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli
+        sudo apt-get install -y kubectl
+
+    - name: Configure AWS Credentials
+      run: |
+        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws configure set default.region ${{ secrets.AWS_DEFAULT_REGION }}
+
+    - name: Login to Amazon ECR
+      run: aws ecr get-login-password --region ${{ secrets.AWS_DEFAULT_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com
+
+    - name: Build Docker Image
+      run: |
+        docker build -t your-image-name .
+      
+    - name: Tag Docker Image
+      run: |
+        docker tag your-image-name:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/your-image-name:latest
+      
+    - name: Push Docker Image to Amazon ECR
+      run: |
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/your-image-name:latest
+
+    - name: Update kubeconfig with EKS cluster name
+      run: |
+        aws eks --region ${{ secrets.AWS_DEFAULT_REGION }} update-kubeconfig --name your-eks-cluster-name
+
+    - name: Install Helm
+      run: |
+        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+        chmod +x get_helm.sh
+        ./get_helm.sh
+
+    - name: Package Helm Chart
+      run: |
+        helm package path/to/your/helm/chart
+
+    - name: Deploy Helm Chart to EKS
+      run: |
+        kubectl apply -f path/to/your/helm/chart/values.yaml
